@@ -1,0 +1,23 @@
+version: '3'
+services:
+  client:
+    image: do-status-client
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./client:/usr/src/app"
+      - "/etc/hostname:/etc/hostname"
+    depends_on:
+      - server
+    command: python main.py
+  server:
+    image: do-status-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./server:/usr/src/app"
+    ports:
+      - "5000:5000"
+    command: python main.py
