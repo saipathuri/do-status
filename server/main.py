@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-sio = SocketIO(app)
+sio = SocketIO(app, cors_allowed_origins='*')
 
 last_known_data = None
 
@@ -16,7 +16,7 @@ def index():
 def event(data):
     global last_known_data
     last_known_data = data
-    sio.emit('ui_data', {'data': 'foobar'})
+    sio.emit('ui_data', {'data': data})
 
 if __name__ == '__main__':
     print("starting server")
