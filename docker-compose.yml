@@ -11,6 +11,8 @@ services:
     depends_on:
       - server
     command: python main.py
+    environment:
+      DEBUG: 'true'
   server:
     image: do-status-server
     build:
